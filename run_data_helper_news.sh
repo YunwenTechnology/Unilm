@@ -1,0 +1,8 @@
+python3 -u data_helper_news.py --path /data/unilm/data_file/news2016zh_train.json --save_path /data/unilm/data_file/news_split_sentence_file/news_0.json --start_index 0 --end_index 300000 > log_news_0.log 2>&1 &
+python3 -u data_helper_news.py --path /data/unilm/data_file/news2016zh_train.json --save_path /data/unilm/data_file/news_split_sentence_file/news_1.json --start_index 300000 --end_index 600000 > log_news_1.log 2>&1 &
+python3 -u data_helper_news.py --path /data/unilm/data_file/news2016zh_train.json --save_path /data/unilm/data_file/news_split_sentence_file/news_2.json --start_index 600000 --end_index 900000 > log_news_2.log 2>&1 &
+python3 -u data_helper_news.py --path /data/unilm/data_file/news2016zh_train.json --save_path /data/unilm/data_file/news_split_sentence_file/news_3.json --start_index 900000 --end_index 1200000 > log_news_3.log 2>&1 &
+python3 -u data_helper_news.py --path /data/unilm/data_file/news2016zh_train.json --save_path /data/unilm/data_file/news_split_sentence_file/news_4.json --start_index 1200000 --end_index 1500000 > log_news_4.log 2>&1 &
+python3 -u data_helper_news.py --path /data/unilm/data_file/news2016zh_train.json --save_path /data/unilm/data_file/news_split_sentence_file/news_5.json --start_index 1500000 --end_index 1800000 > log_news_5.log 2>&1 &
+python3 -u data_helper_news.py --path /data/unilm/data_file/news2016zh_train.json --save_path /data/unilm/data_file/news_split_sentence_file/news_6.json --start_index 1800000 --end_index 2100000 > log_news_6.log 2>&1 &
+python3 -u data_helper_news.py --path /data/unilm/data_file/news2016zh_train.json --save_path /data/unilm/data_file/news_split_sentence_file/news_7.json --start_index 2100000 --end_index 2430751 > log_news_7.log 2>&1 &
