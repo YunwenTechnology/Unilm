@@ -4,10 +4,10 @@ UniLM模型既可以应用于自然语言理解（NLU）任务，又可以应用
 
 模型虽然强大，但微软并没有开源中文的预训练模型。因此云问本着开源之前，将我们预训练好的中文unilm_base模型进行开源。
 ## 模型链接
-| 模型地址  | 提取码 |
-| ------------- | ------------- |
-| [百度云盘](https://pan.baidu.com/s/1iOvyIeYANFMZuppiOEiKbw)  | y2xo  |
-
+| | 模型地址  | 提取码 |
+| ------------- | ------------- | ------------- |
+| tf | [百度云盘](https://pan.baidu.com/s/1HgxIkBl5Yfwrzs1K1B6NFA)  | tblr |
+| torch | [百度云盘](https://pan.baidu.com/s/1DHJGOFJ5cce5N5g4aBDiMQ) | etwf |
 ## 详细介绍
 详细介绍见：[知乎链接](https://zhuanlan.zhihu.com/p/163483660)
 
