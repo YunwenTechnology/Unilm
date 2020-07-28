@@ -42,6 +42,27 @@ python3 -u decode_seq2seq.py --model_type unilm --model_name_or_path /data/unilm
 ~~~
 
 注：根据论文，在NLU任务时，type_token_id为[0,1]；在NLG任务时，type_token_id为[4,5]
+
+补充摘要模型对比实验（参考：[CLGE](https://github.com/CLUEbenchmark/CLGE)）
+* 数据集CSL 中长文本摘要生成
+
+[百度网盘](https://pan.baidu.com/s/1-KfE5oXMJE8Ia2npNxj9fw) 提取码：y2zj
+
+| 模型  | rouge-1 | rouge-2 | rouge-L | BLUE | 参数 |
+| ------------- | ------------- | ------------- | ------------- |  ------------- |  ------------- |
+| bert_base | 61.71% | 50.97% | 60.51% | 41.10% | batch_size=24, length=512, epoch=5, lr=1e-5 |
+| unilm | 62.13% | 51.20% | 60.61% | 41.81% |  batch_size=24, length=512, epoch=5, lr=1e-5  |
+
+
+* 微博新闻摘要数据，从[新闻摘要数据](https://www.cluebenchmarks.com/dataSet_search_modify.html?keywords=%E6%96%87%E6%9C%AC%E6%91%98%E8%A6%81)中随机挑选10000篇作为训练集，1000篇作为测试集。
+
+[百度网盘](https://pan.baidu.com/s/1Vl6Qb7eOEc64oygsC_ec8Q) 提取码：htmh
+
+| 模型  | rouge-1 | rouge-2 | rouge-L | BLUE | 参数 |
+| ------------- | ------------- | ------------- | ------------- |  ------------- |  ------------- |
+| bert_base | 39.74% | 28.69% | 38.68% | 20.02% | batch_size=24, length=512, epoch=5, lr=1e-5 |
+| unilm | 40.58% | 29.60% | 39.21% | 21.35% |  batch_size=24, length=512, epoch=5, lr=1e-5  |
+
 # 训练环境
 * torch 1.4.0
 * transformers 2.6.0
