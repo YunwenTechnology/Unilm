@@ -256,13 +256,11 @@ class Seq2SeqDataset(torch.utils.data.Dataset):
         splits = []
         data = file_data.readlines()
         length = len(data)
-        print(length)
         for i in range(threads + 1):
             splits.append(data[i * (length // threads): (i + 1) * (length // threads)])
         self.ex_list = Parallel(n_jobs=threads, verbose=100)(delayed(self.read_data)(d, None) for d in splits)
         out = []
         for item in self.ex_list:
-            print(len(item))
             out.extend(item)
         self.ex_list = out
         print('Load {0} documents'.format(len(self.ex_list)))
@@ -271,7 +269,6 @@ class Seq2SeqDataset(torch.utils.data.Dataset):
         # sample = eval(line.strip())
         # src_tk = sample["src_text"]
         # tgt_tk = sample["tgt_text"]
-        print(len(lines))
         outs = []
         for line in lines:
             a, b = line.rstrip('\n').split('\t')
