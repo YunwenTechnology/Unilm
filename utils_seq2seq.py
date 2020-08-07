@@ -3,6 +3,7 @@
 
 from random import randint, shuffle, choice
 from random import random as rand
+from joblib import Parallel, delayed
 import math
 import numpy as np
 import torch
@@ -231,32 +232,48 @@ class Seq2SeqDataset(torch.utils.data.Dataset):
         #         assert len(tgt_tk) > 0
         #         self.ex_list.append((src_tk, tgt_tk))
 
+        # file_data = open(file, "r", encoding='utf-8')
+        # #
+        # threads = min(8, cpu_count())
+        # with Pool(threads) as p:
+        #     annotate_ = partial(
+        #         self.read_data,
+        #         tokenizer=self.tokenizer)
+        #     self.ex_list = list(
+        #         tqdm(
+        #             p.imap(annotate_, file_data.readlines(), chunksize=32),
+        #             total=len(file_data.readlines()),
+        #             desc="convert squad examples to features",
+        #         )
+        #     )
+        # # fin = open("look_new.json", "w",encoding="utf-8")
+        # # for jj, m in enumerate(self.ex_list):
+        # #     fin.write(str(jj)+"\t"+str(m)+"\n")
+        # print('Load {0} documents'.format(len(self.ex_list)))
+        
         file_data = open(file, "r", encoding='utf-8')
-        #
-        threads = min(8, cpu_count())
-        with Pool(threads) as p:
-            annotate_ = partial(
-                self.read_data,
-                tokenizer=self.tokenizer)
-            self.ex_list = list(
-                tqdm(
-                    p.imap(annotate_, file_data.readlines(), chunksize=32),
-                    total=len(file_data.readlines()),
-                    desc="convert squad examples to features",
-                )
-            )
-        # fin = open("look_new.json", "w",encoding="utf-8")
-        # for jj, m in enumerate(self.ex_list):
-        #     fin.write(str(jj)+"\t"+str(m)+"\n")
+        threads = min(50, cpu_count())
+        splits = []
+        data = file_data.readlines()
+        length = len(data)
+        for i in range(threads + 1):
+            splits.append(data[i * (length // threads): (i + 1) * (length // threads)])
+        self.ex_list = Parallel(n_jobs=threads, verbose=100)(delayed(self.read_data)(d, None) for d in splits)
+        out = []
+        for item in self.ex_list:
+            out.extend(item)
+        self.ex_list = out
         print('Load {0} documents'.format(len(self.ex_list)))
         # exit()
-    def read_data(self, line, tokenizer):
-        sample = eval(line.strip())
-        # src_tk = tokenizer.tokenize(sample["src_text"])
-        # tgt_tk = tokenizer.tokenize(sample["tgt_text"])
-        src_tk = sample["src_text"]
-        tgt_tk = sample["tgt_text"]
-        return (src_tk, tgt_tk)
+    def read_data(self, lines, tokenizer):
+        # sample = eval(line.strip())
+        # src_tk = sample["src_text"]
+        # tgt_tk = sample["tgt_text"]
+        outs = []
+        for line in lines:
+            a, b = line.rstrip('\n').split('\t')
+            outs.append((a, b))
+        return outs
 
     def __len__(self):
         return len(self.ex_list)
