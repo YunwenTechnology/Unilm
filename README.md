@@ -38,7 +38,7 @@ nohup python3 -u run_seq2seq.py --data_dir /data/unilm/data_file/ --src_file tra
 ~~~
 * test
 ~~~
-python3 -u decode_seq2seq.py --model_type unilm --model_name_or_path /data/unilm/yunwen_unilm/ --model_recover_path /data/unilm/output_dir/model.bin --max_seq_length 512 --input_file /data/unilm/data_file/test.json --output_file /data/unilm/data_file/predict_.json --do_lower_case --batch_size 32 --beam_szie 5 --max_tgt_length 128
+python3 -u decode_seq2seq.py --model_type unilm --model_name_or_path /data/unilm/yunwen_unilm/ --model_recover_path /data/unilm/output_dir/model.bin --max_seq_length 512 --input_file /data/unilm/data_file/test.json --output_file /data/unilm/data_file/predict_.json --do_lower_case --batch_size 32 --beam_s 5 --max_tgt_length 128
 ~~~
 
 注：根据论文，在NLU任务时，type_token_id为[0,1]；在NLG任务时，type_token_id为[4,5]
